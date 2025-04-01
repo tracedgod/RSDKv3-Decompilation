@@ -1,8 +1,9 @@
 name: Build RSDKv3
 on:
-  push:
-    branches:
-      - switch
+  workflow_dispatch:
+  # push:
+    # branches:
+      # - switch
 
 env:
   GENERAL_FLAGS: "-DRETRO_DISABLE_PLUS=ON -DCMAKE_BUILD_TYPE=Release"
@@ -38,7 +39,7 @@ jobs:
             mv ./build/bin/* ./artifacts || true  # Avoid failure if build/bin is empty
             cd ./artifacts
             ls -la
-            zip -r RSDKv3-switch.zip artifacts
+            zip -r RSDKv3-switch.zip *
         - name: Upload artifacts
           uses: actions/upload-artifact@v4
           with:
