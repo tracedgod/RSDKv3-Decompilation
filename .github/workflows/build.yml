@@ -36,9 +36,11 @@ jobs:
           run: |
             mkdir -p artifacts
             mv ./build/bin/* ./artifacts || true  # Avoid failure if build/bin is empty
+            cd ./artifacts
+            ls -la
             zip -r RSDKv3-switch.zip artifacts
         - name: Upload artifacts
           uses: actions/upload-artifact@v4
           with:
             name: v3-switch
-            path: RSDK-v3-switch.zip
+            path: ./artifacts/RSDK-v3-switch.zip
