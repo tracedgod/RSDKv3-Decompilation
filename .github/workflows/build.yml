@@ -29,12 +29,14 @@ jobs:
             echo "DEVKITPRO path: $DEVKITPRO"
             ls -l $DEVKITPRO/cmake/Switch.cmake
         - name: Build RSDKv3
-          run: cmake -B build ${{env.GENERAL_FLAGS}} ${{env.GENERAL_SWITCH_FLAGS}}
-               cmake --build build --parallel
+          run: |
+            cmake -B build ${{env.GENERAL_FLAGS}} ${{env.GENERAL_SWITCH_FLAGS}}
+            cmake --build build --parallel
         - name: Move artifacts
-          run: mkdir artifacts
-               mv ./build/bin/* ./artifacts
-               zip -r RSDKv3-switch.zip
+          run: |
+            mkdir artifacts
+            mv ./build/bin/* ./artifacts
+            zip -r RSDKv3-switch.zip
         - name: Upload artifacts
           uses: actions/upload-artifact@v4
           with:
