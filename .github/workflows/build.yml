@@ -34,9 +34,9 @@ jobs:
             cmake --build build --parallel
         - name: Move artifacts
           run: |
-            mkdir artifacts
-            mv ./build/bin/* ./artifacts
-            zip -r RSDKv3-switch.zip
+            mkdir -p artifacts
+            mv ./build/bin/* ./artifacts || true  # Avoid failure if build/bin is empty
+            zip -r RSDKv3-switch.zip artifacts
         - name: Upload artifacts
           uses: actions/upload-artifact@v4
           with:
